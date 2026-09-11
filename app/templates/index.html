@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>UPI Fraud Detection | V4.2</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f6f8;
+            color: #1f2937;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            margin: 0 0 8px;
+            font-size: 34px;
+        }
+
+        .header p {
+            margin: 0;
+            color: #6b7280;
+            font-size: 15px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .card h2 {
+            margin-top: 0;
+            margin-bottom: 22px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .field label {
+            font-weight: 600;
+            margin-bottom: 7px;
+            font-size: 14px;
+        }
+
+        .field input,
+        .field select {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #d1d5db;
+            border-radius: 7px;
+            font-size: 14px;
+            background: white;
+        }
+
+        .field input:focus,
+        .field select:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 25px;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            background: #2563eb;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        button:disabled {
+            background: #93c5fd;
+            cursor: not-allowed;
+        }
+
+        .result {
+            display: none;
+        }
+
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .result-item {
+            background: #f9fafb;
+            border-radius: 8px;
+            padding: 18px;
+        }
+
+        .result-label {
+            font-size: 13px;
+            color: #6b7280;
+            margin-bottom: 7px;
+        }
+
+        .result-value {
+            font-size: 20px;
+            font-weight: 700;
+            word-break: break-word;
+        }
+
+        .score {
+            font-size: 38px;
+        }
+
+        .low {
+            color: #15803d;
+        }
+
+        .medium {
+            color: #ca8a04;
+        }
+
+        .high {
+            color: #dc2626;
+        }
+
+        .review {
+            color: #ca8a04;
+        }
+
+        .block {
+            color: #dc2626;
+        }
+
+        .allow {
+            color: #15803d;
+        }
+
+        .thresholds {
+            margin-top: 20px;
+            padding: 17px;
+            background: #f3f4f6;
+            border-radius: 8px;
+        }
+
+        .thresholds strong {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .thresholds p {
+            margin: 6px 0;
+            font-size: 14px;
+        }
+
+        .error {
+            display: none;
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 7px;
+            background: #fee2e2;
+            color: #991b1b;
+            font-size: 14px;
+        }
+
+        .success-message {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 7px;
+            background: #dcfce7;
+            color: #166534;
+            font-size: 14px;
+            display: none;
+        }
+
+        .footer {
+            text-align: center;
+            color: #6b7280;
+            font-size: 13px;
+            margin-top: 25px;
+        }
+
+        @media (max-width: 700px) {
+            .container {
+                margin: 15px auto;
+                padding: 12px;
+            }
+
+            .form-grid,
+            .result-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- ========================================================= -->
+    <!-- HEADER -->
+    <!-- ========================================================= -->
+
+    <div class="header">
+        <h1>UPI Fraud Detection</h1>
+        <p>V4.2 Machine Learning Fraud Risk Assessment</p>
+    </div>
+
+
+    <!-- ========================================================= -->
+    <!-- TRANSACTION FORM -->
+    <!-- ========================================================= -->
+
+    <div class="card">
+
+        <h2>Transaction Details</h2>
+
+        <form id="predictionForm">
+
+            <div class="form-grid">
+
+                <div class="field">
+                    <label for="transaction_time">
+                        Transaction Time
+                    </label>
+
+                    <input
+                        type="datetime-local"
+                        id="transaction_time"
+                        required
+                    >
+                </div>
+
+
+                <div class="field">
+                    <label for="account_age_days">
+                        Account Age (days)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="account_age_days"
+                        value="850"
+                        min="0"
+                        required
+                    >
+                </div>
+
+
+                <div class="field">
+                    <label for="credit_score_band">
+                        Credit Score Band
+                    </label>
+
+                    <input
+                        type="number"
+                        id="credit_score_band"
+                        value="4"
+                        required
+                    >
+                </div>
+
+
+                <div class="field">
+                    <label for="kyc_level">
+                        KYC Level
+                    </label>
+
+                    <input
+                        type="number"
+                        id="kyc_level"
+                        value="2"
+                        required
+                    >
+                </div>
+
+
+                <div class="field">
+                    <label for="avg_monthly_spend">
+                        Average Monthly Spend
+                    </label>
+
+                    <input
+                        type="number"
+                        id="avg_monthly_spend"
+                        value="5000"
+                        step="any"
+                        min="0"
+                        required
+                    >
+                </div>
+
+
+                <div class="field">
+                    <label for="transaction_amount">
+                        Transaction Amount
+                    </label>
+
+                    <input
+                        type="number"
+                        id="transaction_amount"
+                        value="1200"
+                        step="any"
+                        min="0"
+                        required
+                    >
+                </div>
+
+
+                <div class="field">
+                    <label for="merchant_risk_score">
+                        Merchant Risk Score
+                    </label>
+
+                    <input
+                        type="number"
+                        id="merchant_risk_score"
+                        value="0.2"
+                        step="any"
+                        min="0"
+                        required
+                    >
+                </div>
+
+
+                <div class="field">
+                    <label for="ip_risk_score">
+                        IP Risk Score
+                    </label>
+
+                    <input
+                        type="number"
+                        id="ip_risk_score"
+                        value="0.1"
+                        step="any"
+                        min="0"
+                        required
+                    >
+                </div>
+
+
+                <div class="field">
+                    <label for="payment_channel">
+                        Payment Channel
+                    </label>
+
+                    <select id="payment_channel">
+                        <option value="upi">UPI</option>
+                        <option value="card">Card</option>
+                        <option value="netbanking">Net Banking</option>
+                    </select>
+                </div>
+
+
+                <div class="field">
+                    <label for="device_type">
+                        Device Type
+                    </label>
+
+                    <select id="device_type">
+                        <option value="mobile">Mobile</option>
+                        <option value="desktop">Desktop</option>
+                        <option value="tablet">Tablet</option>
+                    </select>
+                </div>
+
+
+                <div class="field">
+                    <label for="is_international">
+                        International Transaction
+                    </label>
+
+                    <select id="is_international">
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+
+
+                <div class="field">
+                    <label for="txn_count_1h">
+                        Transactions in Last 1 Hour
+                    </label>
+
+                    <input
+                        type="number"
+                        id="txn_count_1h"
+                        value="2"
+                        min="0"
+                        required
+                    >
+                </div>
+
+
+                <div class="field">
+                    <label for="txn_count_24h">
+                        Transactions in Last 24 Hours
+                    </label>
+
+                    <input
+                        type="number"
+                        id="txn_count_24h"
+                        value="8"
+                        min="0"
+                        required
+                    >
+                </div>
+
+
+                <div class="field">
+                    <label for="failed_txn_count_24h">
+                        Failed Transactions (24h)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="failed_txn_count_24h"
+                        value="0"
+                        min="0"
+                        required
+                    >
+                </div>
+
+
+                <div class="field">
+                    <label for="geo_distance_from_last_txn">
+                        Geo Distance from Last Transaction
+                    </label>
+
+                    <input
+                        type="number"
+                        id="geo_distance_from_last_txn"
+                        value="2"
+                        step="any"
+                        min="0"
+                        required
+                    >
+                </div>
+
+
+                <div class="field">
+                    <label for="amount_deviation_from_user_mean">
+                        Amount Deviation from User Mean
+                    </label>
+
+                    <input
+                        type="number"
+                        id="amount_deviation_from_user_mean"
+                        value="100"
+                        step="any"
+                        required
+                    >
+                </div>
+
+            </div>
+
+
+            <button
+                type="submit"
+                id="analyzeButton"
+            >
+                Analyze Transaction
+            </button>
+
+        </form>
+
+
+        <div id="error" class="error"></div>
+
+        <div
+            id="successMessage"
+            class="success-message"
+        >
+            Transaction successfully analyzed.
+        </div>
+
+    </div>
+
+
+    <!-- ========================================================= -->
+    <!-- RESULT -->
+    <!-- ========================================================= -->
+
+    <div id="result" class="card result">
+
+        <h2>Fraud Assessment</h2>
+
+
+        <div class="result-grid">
+
+            <div class="result-item">
+
+                <div class="result-label">
+                    Fraud Score
+                </div>
+
+                <div
+                    id="fraudScore"
+                    class="result-value score"
+                >
+                    -
+                </div>
+
+            </div>
+
+
+            <div class="result-item">
+
+                <div class="result-label">
+                    Risk Tier
+                </div>
+
+                <div
+                    id="riskTier"
+                    class="result-value"
+                >
+                    -
+                </div>
+
+            </div>
+
+
+            <div class="result-item">
+
+                <div class="result-label">
+                    Operating Decision
+                </div>
+
+                <div
+                    id="operatingDecision"
+                    class="result-value"
+                >
+                    -
+                </div>
+
+            </div>
+
+
+            <div class="result-item">
+
+                <div class="result-label">
+                    Recommendation
+                </div>
+
+                <div
+                    id="recommendation"
+                    class="result-value"
+                >
+                    -
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ===================================================== -->
+        <!-- THRESHOLDS -->
+        <!-- ===================================================== -->
+
+        <div class="thresholds">
+
+            <strong>Model Thresholds</strong>
+
+            <p>
+                80% Recall Threshold:
+                <span id="recallThreshold">-</span>
+            </p>
+
+            <p>
+                Medium Risk:
+                <span id="mediumThreshold">-</span>
+            </p>
+
+            <p>
+                High Risk:
+                <span id="highThreshold">-</span>
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer">
+        UPI Fraud Detection API · V4.2
+    </div>
+
+</div>
+
+
+<!-- ============================================================= -->
+<!-- JAVASCRIPT -->
+<!-- ============================================================= -->
+
+<script>
+
+    // -------------------------------------------------------------
+    // Default transaction time
+    // -------------------------------------------------------------
+
+    document.getElementById(
+        "transaction_time"
+    ).value = "2023-12-15T14:30";
+
+
+    // -------------------------------------------------------------
+    // Form submission
+    // -------------------------------------------------------------
+
+    document.getElementById(
+        "predictionForm"
+    ).addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+
+            const errorBox =
+                document.getElementById("error");
+
+            const successBox =
+                document.getElementById(
+                    "successMessage"
+                );
+
+            const resultBox =
+                document.getElementById("result");
+
+            const analyzeButton =
+                document.getElementById(
+                    "analyzeButton"
+                );
+
+
+            // Reset messages
+
+            errorBox.style.display = "none";
+            successBox.style.display = "none";
+
+
+            // -----------------------------------------------------
+            // Build transaction JSON
+            // -----------------------------------------------------
+
+            const transaction = {
+
+                transaction_time:
+                    document.getElementById(
+                        "transaction_time"
+                    ).value.replace("T", " ") + ":00",
+
+
+                account_age_days:
+                    Number(
+                        document.getElementById(
+                            "account_age_days"
+                        ).value
+                    ),
+
+
+                credit_score_band:
+                    Number(
+                        document.getElementById(
+                            "credit_score_band"
+                        ).value
+                    ),
+
+
+                kyc_level:
+                    Number(
+                        document.getElementById(
+                            "kyc_level"
+                        ).value
+                    ),
+
+
+                avg_monthly_spend:
+                    Number(
+                        document.getElementById(
+                            "avg_monthly_spend"
+                        ).value
+                    ),
+
+
+                merchant_risk_score:
+                    Number(
+                        document.getElementById(
+                            "merchant_risk_score"
+                        ).value
+                    ),
+
+
+                transaction_amount:
+                    Number(
+                        document.getElementById(
+                            "transaction_amount"
+                        ).value
+                    ),
+
+
+                payment_channel:
+                    document.getElementById(
+                        "payment_channel"
+                    ).value,
+
+
+                device_type:
+                    document.getElementById(
+                        "device_type"
+                    ).value,
+
+
+                is_international:
+                    Number(
+                        document.getElementById(
+                            "is_international"
+                        ).value
+                    ),
+
+
+                ip_risk_score:
+                    Number(
+                        document.getElementById(
+                            "ip_risk_score"
+                        ).value
+                    ),
+
+
+                txn_count_1h:
+                    Number(
+                        document.getElementById(
+                            "txn_count_1h"
+                        ).value
+                    ),
+
+
+                txn_count_24h:
+                    Number(
+                        document.getElementById(
+                            "txn_count_24h"
+                        ).value
+                    ),
+
+
+                failed_txn_count_24h:
+                    Number(
+                        document.getElementById(
+                            "failed_txn_count_24h"
+                        ).value
+                    ),
+
+
+                geo_distance_from_last_txn:
+                    Number(
+                        document.getElementById(
+                            "geo_distance_from_last_txn"
+                        ).value
+                    ),
+
+
+                amount_deviation_from_user_mean:
+                    Number(
+                        document.getElementById(
+                            "amount_deviation_from_user_mean"
+                        ).value
+                    )
+            };
+
+
+            // -----------------------------------------------------
+            // Disable button while predicting
+            // -----------------------------------------------------
+
+            analyzeButton.disabled = true;
+
+            analyzeButton.textContent =
+                "Analyzing...";
+
+
+            try {
+
+                // -------------------------------------------------
+                // Call Flask API
+                // -------------------------------------------------
+
+                const response =
+                    await fetch(
+                        "/predict",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body:
+                                JSON.stringify(
+                                    transaction
+                                )
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                // -------------------------------------------------
+                // Handle API errors
+                // -------------------------------------------------
+
+                if (!response.ok) {
+
+                    let message =
+                        data.error ||
+                        "Prediction failed.";
+
+                    if (data.field) {
+                        message +=
+                            " Missing field: " +
+                            data.field;
+                    }
+
+                    throw new Error(message);
+                }
+
+
+                // -------------------------------------------------
+                // Fraud score
+                // -------------------------------------------------
+
+                document.getElementById(
+                    "fraudScore"
+                ).textContent =
+                    Number(
+                        data.fraud_score
+                    ).toFixed(6);
+
+
+                // -------------------------------------------------
+                // Risk tier
+                // -------------------------------------------------
+
+                const riskTier =
+                    document.getElementById(
+                        "riskTier"
+                    );
+
+                riskTier.textContent =
+                    data.risk_tier;
+
+                riskTier.className =
+                    "result-value " +
+                    data.risk_tier.toLowerCase();
+
+
+                // -------------------------------------------------
+                // Operating decision
+                // -------------------------------------------------
+
+                const decision =
+                    document.getElementById(
+                        "operatingDecision"
+                    );
+
+                decision.textContent =
+                    data.operating_decision;
+
+                decision.className =
+                    "result-value";
+
+
+                if (
+                    data.operating_decision ===
+                    "ALLOW"
+                ) {
+
+                    decision.classList.add(
+                        "allow"
+                    );
+
+                } else if (
+                    data.operating_decision ===
+                    "FLAG_FOR_REVIEW"
+                ) {
+
+                    decision.classList.add(
+                        "review"
+                    );
+
+                } else {
+
+                    decision.classList.add(
+                        "block"
+                    );
+                }
+
+
+                // -------------------------------------------------
+                // Recommendation
+                // -------------------------------------------------
+
+                document.getElementById(
+                    "recommendation"
+                ).textContent =
+                    data.recommendation;
+
+
+                // -------------------------------------------------
+                // Thresholds
+                // IMPORTANT:
+                // 80_percent_recall must use [] notation
+                // -------------------------------------------------
+
+                document.getElementById(
+                    "recallThreshold"
+                ).textContent =
+                    Number(
+                        data.thresholds[
+                            "80_percent_recall"
+                        ]
+                    ).toFixed(6);
+
+
+                document.getElementById(
+                    "mediumThreshold"
+                ).textContent =
+                    Number(
+                        data.thresholds.medium_risk
+                    ).toFixed(6);
+
+
+                document.getElementById(
+                    "highThreshold"
+                ).textContent =
+                    Number(
+                        data.thresholds.high_risk
+                    ).toFixed(6);
+
+
+                // -------------------------------------------------
+                // Show result
+                // -------------------------------------------------
+
+                resultBox.style.display =
+                    "block";
+
+                successBox.style.display =
+                    "block";
+
+
+                resultBox.scrollIntoView({
+                    behavior: "smooth"
+                });
+
+
+            } catch (error) {
+
+                errorBox.textContent =
+                    error.message;
+
+                errorBox.style.display =
+                    "block";
+
+                resultBox.style.display =
+                    "none";
+
+            } finally {
+
+                // -------------------------------------------------
+                // Re-enable button
+                // -------------------------------------------------
+
+                analyzeButton.disabled =
+                    false;
+
+                analyzeButton.textContent =
+                    "Analyze Transaction";
+            }
+
+        }
+    );
+
+</script>
+
+</body>
+</html>
