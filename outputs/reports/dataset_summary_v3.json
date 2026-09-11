@@ -1,0 +1,20 @@
+{
+    "training_rows": 210079,
+    "validation_rows": 45017,
+    "external_test_rows": 99887,
+    "training_fraud_count": 3136,
+    "validation_fraud_count": 888,
+    "external_test_fraud_count": 1983,
+    "training_fraud_rate": 0.014927717668115329,
+    "validation_fraud_rate": 0.019725881333718373,
+    "external_test_fraud_rate": 0.019852433249572015,
+    "feature_count": 38,
+    "numeric_feature_count": 36,
+    "categorical_feature_count": 2,
+    "training_start": "2023-01-01 00:02:00.328105993",
+    "training_end": "2023-07-11 02:24:29.306457882",
+    "validation_start": "2023-07-11 02:25:36.545985235",
+    "validation_end": "2023-08-20 23:06:23.213164506",
+    "external_test_start": "2023-10-01 00:02:41.559131982",
+    "external_test_end": "2023-12-30 23:58:52.790967409"
+}

@@ -1,0 +1,8 @@
+{
+  "timestamp": "transaction_time",
+  "amount": "transaction_amount",
+  "user": "customer_id",
+  "merchant": "merchant_id",
+  "device": "device_type",
+  "location": null
+}

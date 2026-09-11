@@ -1,0 +1,27 @@
+{
+    "model": "HistGradientBoosting_ClassWeight",
+    "feature_count": 38,
+    "threshold_strategy": "Validation threshold selected for minimum 80% recall",
+    "recall_threshold": 0.007172487311201407,
+    "medium_risk_threshold": 0.007172487311201407,
+    "high_risk_threshold": 0.007172487311201407,
+    "validation": {
+        "pr_auc": 0.323920038694825,
+        "roc_auc": 0.8276357537146927,
+        "precision": 0.04536753445635528,
+        "recall": 0.8006756756756757,
+        "f1": 0.08586956521739131,
+        "brier_score": 0.01569561511266728
+    },
+    "external_test": {
+        "pr_auc": 0.3439203378422593,
+        "roc_auc": 0.836181868689878,
+        "precision": 0.04681746449237244,
+        "recall": 0.8078668683812406,
+        "f1": 0.08850584238004475,
+        "tn": 65288,
+        "fp": 32616,
+        "fn": 381,
+        "tp": 1602
+    }
+}

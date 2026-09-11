@@ -1,0 +1,7 @@
+{
+  "target": "is_fraud",
+  "fraud_rate": 0.01623055315831037,
+  "class_0": 295242,
+  "class_1": 4871,
+  "imbalance_ratio": 60.61219462122767
+}

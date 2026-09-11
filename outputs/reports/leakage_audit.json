@@ -1,0 +1,7 @@
+[
+  {
+    "column": "post_auth_risk_score",
+    "reason": "Explicitly excluded: post-authorization information",
+    "action": "REMOVE"
+  }
+]

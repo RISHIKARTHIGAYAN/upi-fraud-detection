@@ -1,0 +1,3 @@
+risk_tier,transactions,fraud_count,fraud_rate
+HIGH_RISK,34218,1602,0.04681746449237244
+LOW_RISK,65669,381,0.005801824300659368

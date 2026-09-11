@@ -1,0 +1,35 @@
+{
+  "project": "UPI Fraud Detection",
+  "version": "V2",
+  "target": "is_fraud",
+  "known_leakage_removed": [
+    "post_auth_risk_score"
+  ],
+  "identifier_columns_removed": [
+    "transaction_id",
+    "customer_id",
+    "merchant_id"
+  ],
+  "train_rows": 210079,
+  "validation_rows": 45017,
+  "test_rows": 99887,
+  "feature_count": 43,
+  "best_experiment": "HistGradientBoosting + Class Weight",
+  "validation_pr_auc": 0.3118881306425446,
+  "final_test_metrics": {
+    "threshold": 0.007082087105115,
+    "precision": 0.04582730342498794,
+    "recall": 0.8144225920322743,
+    "f1": 0.0867719750698474,
+    "roc_auc": 0.8323306401314261,
+    "pr_auc": 0.3339900674348244,
+    "true_negative": 64278,
+    "false_positive": 33626,
+    "false_negative": 368,
+    "true_positive": 1615
+  },
+  "model_path": "C:\\Users\\OMEN\\Downloads\\M.Tech files\\Github Repos\\upi-fraud-detection\\outputs\\models\\upi_fraud_model_v2.joblib",
+  "smote_available": true,
+  "min_recall_for_threshold": 0.8,
+  "random_state": 42
+}

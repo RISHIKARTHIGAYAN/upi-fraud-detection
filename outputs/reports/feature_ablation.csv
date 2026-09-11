@@ -1,0 +1,6 @@
+experiment,features_removed,features_remaining,pr_auc
+all_features,,37,0.32772073240469013
+without_txn_count_24h,txn_count_24h,36,0.32771946338302066
+without_risk_features,"merchant_risk_score, ip_risk_score, combined_merchant_ip_risk, max_risk_score, mean_risk_score, international_ip_risk, international_merchant_risk, behavioral_risk_composite",29,0.3240839522845163
+without_failed_txn_count_24h,failed_txn_count_24h,36,0.2847945781263383
+without_velocity_features,"txn_count_1h, txn_count_24h, txn_velocity_ratio, txn_count_difference, international_velocity",32,0.13588592545134986

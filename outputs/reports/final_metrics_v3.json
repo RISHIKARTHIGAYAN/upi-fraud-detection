@@ -1,0 +1,27 @@
+{
+    "model": "HistGradientBoosting_ClassWeight",
+    "threshold": 0.0071444314939091156,
+    "validation": {
+        "pr_auc": 0.3236331861517264,
+        "roc_auc": 0.8290641008680734,
+        "precision": 0.04634941329856584,
+        "recall": 0.8006756756756757,
+        "f1": 0.08762632487059403
+    },
+    "external_test": {
+        "threshold": 0.0071444314939091156,
+        "precision": 0.048284202569916855,
+        "recall": 0.805345436207766,
+        "f1": 0.09110616692338411,
+        "roc_auc": 0.8353208154671794,
+        "pr_auc": 0.3501464498848283,
+        "tn": 66426,
+        "fp": 31478,
+        "fn": 386,
+        "tp": 1597
+    },
+    "feature_count": 38,
+    "numeric_feature_count": 36,
+    "categorical_feature_count": 2,
+    "minimum_validation_recall_constraint": 0.8
+}

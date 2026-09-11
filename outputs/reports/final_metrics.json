@@ -1,0 +1,63 @@
+{
+    "pipeline_version": "V4.2",
+    "model": "LogisticRegression_Balanced",
+    "model_selection_metric": "validation_PR_AUC",
+    "validation": {
+        "pr_auc": 0.32772073240469013,
+        "roc_auc": 0.8437033068505245,
+        "threshold": 0.4753759680426371,
+        "precision": 0.05329008341056534,
+        "recall": 0.8001988071570576,
+        "f1": 0.09992552135054618
+    },
+    "validation_f1_optimal": {
+        "threshold": 0.8750903145533252,
+        "precision": 0.4549237170596394,
+        "recall": 0.3260437375745527,
+        "f1": 0.3798494499131442
+    },
+    "external_test": {
+        "threshold": 0.4753759680426371,
+        "precision": 0.05218194412375895,
+        "recall": 0.7977811396873424,
+        "f1": 0.09795665634674923,
+        "roc_auc": 0.8412832361145897,
+        "pr_auc": 0.3410917470921706,
+        "confusion_matrix": [
+            [
+                69169,
+                28735
+            ],
+            [
+                401,
+                1582
+            ]
+        ]
+    },
+    "external_test_f1_optimal": {
+        "threshold": 0.8750903145533252,
+        "precision": 0.450371370695476,
+        "recall": 0.3363590519415028,
+        "f1": 0.3851039260969977
+    },
+    "business_thresholds": {
+        "medium": 0.7572387294942443,
+        "high": 0.8591613174477475
+    },
+    "external_medium_risk": {
+        "precision": 0.1895220890129742,
+        "recall": 0.5819465456379224,
+        "f1": 0.2859266600594648
+    },
+    "external_high_risk": {
+        "precision": 0.3918430562725865,
+        "recall": 0.3827534039334342,
+        "f1": 0.38724489795918365
+    },
+    "calibration": {
+        "validation_brier_score": 0.17104682392149215
+    },
+    "target_recall": 0.8,
+    "medium_precision_target": 0.2,
+    "high_precision_target": 0.4
+}

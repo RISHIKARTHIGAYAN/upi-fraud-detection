@@ -1,0 +1,135 @@
+{
+  "dataset": "TRAIN",
+  "rows": 300113,
+  "columns": 21,
+  "duplicates": 0,
+  "memory_mb": 101.66266822814941,
+  "columns_detail": {
+    "transaction_id": {
+      "dtype": "int64",
+      "missing": 0,
+      "missing_percentage": 0.0,
+      "unique": 300113
+    },
+    "transaction_time": {
+      "dtype": "str",
+      "missing": 0,
+      "missing_percentage": 0.0,
+      "unique": 300113
+    },
+    "customer_id": {
+      "dtype": "int64",
+      "missing": 0,
+      "missing_percentage": 0.0,
+      "unique": 39983
+    },
+    "merchant_id": {
+      "dtype": "int64",
+      "missing": 0,
+      "missing_percentage": 0.0,
+      "unique": 8000
+    },
+    "account_age_days": {
+      "dtype": "int64",
+      "missing": 0,
+      "missing_percentage": 0.0,
+      "unique": 1970
+    },
+    "credit_score_band": {
+      "dtype": "int64",
+      "missing": 0,
+      "missing_percentage": 0.0,
+      "unique": 5
+    },
+    "kyc_level": {
+      "dtype": "int64",
+      "missing": 0,
+      "missing_percentage": 0.0,
+      "unique": 3
+    },
+    "avg_monthly_spend": {
+      "dtype": "float64",
+      "missing": 0,
+      "missing_percentage": 0.0,
+      "unique": 39983
+    },
+    "merchant_risk_score": {
+      "dtype": "float64",
+      "missing": 0,
+      "missing_percentage": 0.0,
+      "unique": 7941
+    },
+    "transaction_amount": {
+      "dtype": "float64",
+      "missing": 0,
+      "missing_percentage": 0.0,
+      "unique": 300102
+    },
+    "payment_channel": {
+      "dtype": "str",
+      "missing": 0,
+      "missing_percentage": 0.0,
+      "unique": 4
+    },
+    "device_type": {
+      "dtype": "str",
+      "missing": 0,
+      "missing_percentage": 0.0,
+      "unique": 3
+    },
+    "is_international": {
+      "dtype": "int64",
+      "missing": 0,
+      "missing_percentage": 0.0,
+      "unique": 2
+    },
+    "ip_risk_score": {
+      "dtype": "float64",
+      "missing": 0,
+      "missing_percentage": 0.0,
+      "unique": 232786
+    },
+    "txn_count_1h": {
+      "dtype": "int64",
+      "missing": 0,
+      "missing_percentage": 0.0,
+      "unique": 10
+    },
+    "txn_count_24h": {
+      "dtype": "int64",
+      "missing": 0,
+      "missing_percentage": 0.0,
+      "unique": 15
+    },
+    "failed_txn_count_24h": {
+      "dtype": "int64",
+      "missing": 0,
+      "missing_percentage": 0.0,
+      "unique": 6
+    },
+    "geo_distance_from_last_txn": {
+      "dtype": "float64",
+      "missing": 0,
+      "missing_percentage": 0.0,
+      "unique": 299528
+    },
+    "amount_deviation_from_user_mean": {
+      "dtype": "float64",
+      "missing": 0,
+      "missing_percentage": 0.0,
+      "unique": 300100
+    },
+    "is_fraud": {
+      "dtype": "int64",
+      "missing": 0,
+      "missing_percentage": 0.0,
+      "unique": 2
+    },
+    "post_auth_risk_score": {
+      "dtype": "float64",
+      "missing": 0,
+      "missing_percentage": 0.0,
+      "unique": 213701
+    }
+  }
+}

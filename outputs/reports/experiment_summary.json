@@ -1,0 +1,116 @@
+{
+  "project": "UPI Fraud Detection",
+  "train_file": "C:\\Users\\OMEN\\Downloads\\M.Tech files\\Github Repos\\upi-fraud-detection\\data\\raw\\transactions_train.csv",
+  "test_file": "C:\\Users\\OMEN\\Downloads\\M.Tech files\\Github Repos\\upi-fraud-detection\\data\\raw\\transactions_test.csv",
+  "target": "is_fraud",
+  "identified_columns": {
+    "timestamp": "transaction_time",
+    "amount": "transaction_amount",
+    "user": "customer_id",
+    "merchant": "merchant_id",
+    "device": "device_type",
+    "location": null
+  },
+  "feature_count": 37,
+  "training_rows": 210079,
+  "validation_rows": 45017,
+  "test_rows": 99887,
+  "best_model": "RandomForest",
+  "threshold": 0.7161802970692766,
+  "validation_results": {
+    "LogisticRegression": {
+      "default_threshold": {
+        "threshold": 0.5,
+        "precision": 0.9877641824249166,
+        "recall": 1.0,
+        "f1": 0.9938444320089536,
+        "roc_auc": 0.9998634480522808,
+        "pr_auc": 0.9667041368683906,
+        "true_negative": 44118,
+        "false_positive": 11,
+        "false_negative": 0,
+        "true_positive": 888
+      },
+      "tuned_threshold": {
+        "threshold": 0.9974587971434464,
+        "precision": 0.9921787709497206,
+        "recall": 1.0,
+        "f1": 0.9960740325294447,
+        "roc_auc": 0.9998634480522808,
+        "pr_auc": 0.9667041368683906,
+        "true_negative": 44122,
+        "false_positive": 7,
+        "false_negative": 0,
+        "true_positive": 888
+      },
+      "training_time_seconds": 1.9432523250579834
+    },
+    "RandomForest": {
+      "default_threshold": {
+        "threshold": 0.5,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "roc_auc": 1.0,
+        "pr_auc": 1.0,
+        "true_negative": 44129,
+        "false_positive": 0,
+        "false_negative": 0,
+        "true_positive": 888
+      },
+      "tuned_threshold": {
+        "threshold": 0.7161802970692766,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "roc_auc": 1.0,
+        "pr_auc": 1.0,
+        "true_negative": 44129,
+        "false_positive": 0,
+        "false_negative": 0,
+        "true_positive": 888
+      },
+      "training_time_seconds": 29.73673963546753
+    },
+    "HistGradientBoosting": {
+      "default_threshold": {
+        "threshold": 0.5,
+        "precision": 0.9777530589543938,
+        "recall": 0.9898648648648649,
+        "f1": 0.9837716843872412,
+        "roc_auc": 0.9999774157215976,
+        "pr_auc": 0.9988524939122914,
+        "true_negative": 44109,
+        "false_positive": 20,
+        "false_negative": 9,
+        "true_positive": 879
+      },
+      "tuned_threshold": {
+        "threshold": 0.469475256401339,
+        "precision": 0.9767955801104973,
+        "recall": 0.9954954954954955,
+        "f1": 0.9860568878973787,
+        "roc_auc": 0.9999774157215976,
+        "pr_auc": 0.9988524939122914,
+        "true_negative": 44108,
+        "false_positive": 21,
+        "false_negative": 4,
+        "true_positive": 884
+      },
+      "training_time_seconds": 3.0742440223693848
+    }
+  },
+  "final_test_metrics": {
+    "threshold": 0.7161802970692766,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "roc_auc": 1.0,
+    "pr_auc": 1.0,
+    "true_negative": 97904,
+    "false_positive": 0,
+    "false_negative": 0,
+    "true_positive": 1983
+  },
+  "model_path": "C:\\Users\\OMEN\\Downloads\\M.Tech files\\Github Repos\\upi-fraud-detection\\outputs\\models\\upi_fraud_model.joblib"
+}
